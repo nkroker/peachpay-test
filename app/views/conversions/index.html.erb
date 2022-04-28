@@ -1,2 +1,27 @@
-<h1>Conversions#index</h1>
-<p>Find me in app/views/conversions/index.html.erb</p>
+<fieldset>
+  <legend>Currency Conversion</legend>
+  <%= form_with model: @currency, url: convert_conversions_path, id: 'currency-form', data: {turbo: 'false', remote: 'true'} do |f| %>
+    <div class="field">
+      <b><%= f.label :amount %></b> <br/>
+      <%= f.number_field :amount, step: :any %>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div class="field">
+      <b><%= f.label :currency %></b> <br/>
+      <%= f.select :currency, options_for_select(Currency.available_currencies) %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit", id: 'currency-submit' %>
+    </div>
+  <% end %>
+
+  <br>
+  <br>
+  <div>
+    <b id="result-area"></b>
+  </div>
+</fieldset>

@@ -1,7 +1,17 @@
 class ConversionsController < ApplicationController
-  def index
+  def index; end
+
+  def convert
+    @conversion = Currency.convert_amount(conversion_params)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
-  def show
+  private
+
+  def conversion_params
+    params.permit(:amount, :currency)
   end
 end
